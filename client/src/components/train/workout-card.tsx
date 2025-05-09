@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWorkout } from "@/context/workout-context";
 import RepCounter from "./rep-counter";
 import WeightControls from "./weight-controls";
@@ -14,21 +14,34 @@ interface WorkoutCardProps {
 export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutCardProps) {
   const { 
     startWorkout, 
-    completeWorkout, 
-    completeSet, 
+    completeWorkout,
+    undoCompleteWorkout, 
+    completeSet,
+    removeSet,
+    addSet, 
     getLastWeight, 
-    getSetsForWorkout 
+    getSetsForWorkout,
+    lifts 
   } = useWorkout();
   
   const [expanded, setExpanded] = useState(isActive);
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [weight, setWeight] = useState(getLastWeight(workout.liftId) || workout.defaultWeight);
   const [selectedReps, setSelectedReps] = useState<number | null>(null);
+  const [totalSets, setTotalSets] = useState(workout.defaultSets);
   
   // Get exercise data
   const sets = getSetsForWorkout(workout.id);
-  const totalSets = workout.defaultSets;
   const isCurrentSet = sets.length === currentSetIndex;
+  
+  // Find the lift to get default reps
+  const lift = lifts.find(l => l.id === workout.liftId);
+  const defaultReps = lift?.defaultReps || 8;
+  
+  // Update current set index when sets change
+  useEffect(() => {
+    setCurrentSetIndex(sets.length);
+  }, [sets.length]);
   
   // Handle weight change
   const handleWeightChange = (newWeight: number) => {
@@ -50,13 +63,36 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
       completed: true
     });
     
-    // Move to next set or complete workout
-    if (currentSetIndex + 1 < totalSets) {
-      setCurrentSetIndex(currentSetIndex + 1);
-      setSelectedReps(null);
-    } else {
-      completeWorkout(workout.id);
+    // Reset for next set
+    setSelectedReps(null);
+    
+    // If all sets completed, ask to finish exercise
+    if (sets.length + 1 >= totalSets) {
+      // Can still add more sets if needed
     }
+  };
+  
+  // Handle adding an extra set
+  const handleAddSet = () => {
+    setTotalSets(totalSets + 1);
+    addSet(workout.id);
+  };
+  
+  // Handle removing a specific set
+  const handleRemoveSet = (index: number) => {
+    removeSet(workout.id, index);
+  };
+  
+  // Handle completing the entire exercise
+  const handleCompleteExercise = () => {
+    completeWorkout(workout.id);
+    setExpanded(false);
+  };
+  
+  // Handle undoing a completed exercise
+  const handleUndoComplete = () => {
+    undoCompleteWorkout(workout.id);
+    setExpanded(true);
   };
   
   // Handle card click
@@ -73,6 +109,7 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
     
     if (!isCompleted && !isActive) {
       startWorkout(workout.id);
+      setExpanded(true);
     } else {
       setExpanded(!expanded);
     }
@@ -112,11 +149,21 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
           </div>
           <div>
             <h3 className="font-body font-medium text-white">{workout.name}</h3>
-            <p className="text-xs text-gray-400">{workout.defaultSets} sets × {workout.repRange} reps</p>
+            <p className="text-xs text-gray-400">{totalSets} sets × {workout.repRange} reps</p>
           </div>
         </div>
         <div className="flex items-center">
-          <div className={`h-6 w-6 bg-background rounded-full flex items-center justify-center pixel-border ${
+          {isCompleted ? (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => { e.stopPropagation(); handleUndoComplete(); }}
+              className="text-xs text-gray-400 hover:text-white"
+            >
+              <i className="ri-refresh-line mr-1"></i> Undo
+            </Button>
+          ) : null}
+          <div className={`h-6 w-6 ml-2 bg-background rounded-full flex items-center justify-center pixel-border ${
             isActive ? "border-accent" : isCompleted ? "border-success" : "border-muted"
           }`}>
             {isCompleted ? (
@@ -124,7 +171,7 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
             ) : isActive ? (
               <span className="text-accent text-xs font-pixel">GO</span>
             ) : (
-              <span className="text-gray-400 text-xs">{workout.defaultSets}</span>
+              <span className="text-gray-400 text-xs">{sets.length}/{totalSets}</span>
             )}
           </div>
         </div>
@@ -136,50 +183,115 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
           <div className="space-y-3">
             {isCompleted ? (
               // Display completed sets
-              sets.map((set, index) => (
-                <div key={index} className="flex items-center justify-between text-sm">
-                  <span className="text-secondary font-pixel text-xs">SET {index + 1}</span>
-                  <div className="flex items-center">
-                    <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
-                    <i className="ri-checkbox-circle-line text-success"></i>
+              <div>
+                <div className="mb-3">
+                  <div className="flex justify-between text-xs text-gray-400 mb-2">
+                    <span>Set</span>
+                    <span>Weight × Reps</span>
                   </div>
+                  {sets.map((set, index) => (
+                    <div key={index} className="flex items-center justify-between text-sm mb-1.5">
+                      <span className="text-secondary font-pixel text-xs">SET {index + 1}</span>
+                      <div className="flex items-center">
+                        <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
+                        <i className="ri-checkbox-circle-line text-success"></i>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))
+              </div>
             ) : isActive ? (
               // Active set input
-              <div className="set-input-container space-y-6">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-secondary font-pixel text-xs">SET {currentSetIndex + 1}</span>
-                  
-                  {/* Weight Input */}
-                  <div className="flex items-center">
-                    <WeightControls
-                      value={weight}
-                      onChange={handleWeightChange}
-                      step={workout.weightIncrement || 5}
-                    />
-                    <span className="ml-2 text-xs text-gray-400">lbs</span>
+              <div className="set-input-container space-y-4">
+                {/* Display completed sets */}
+                {sets.length > 0 && (
+                  <div className="mb-3">
+                    <div className="flex justify-between text-xs text-gray-400 mb-2">
+                      <span>Set</span>
+                      <div className="flex items-center">
+                        <span className="mr-6">Weight × Reps</span>
+                        <span>Edit</span>
+                      </div>
+                    </div>
+                    {sets.map((set, index) => (
+                      <div key={index} className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800">
+                        <span className="text-gray-300 font-pixel text-xs">SET {index + 1}</span>
+                        <div className="flex items-center">
+                          <span className="mr-6 font-body">{set.weight} lbs × {set.reps} reps</span>
+                          <Button 
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => { e.stopPropagation(); handleRemoveSet(index); }}
+                            className="px-2 py-1 h-6 text-xs text-gray-400 hover:text-white"
+                          >
+                            <i className="ri-delete-bin-line"></i>
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
+                )}
                 
-                {/* Rep Counter */}
-                <div className="mb-3">
-                  <p className="text-xs text-gray-400 mb-2">Reps completed:</p>
-                  <RepCounter 
-                    maxReps={12} 
-                    value={selectedReps} 
-                    onChange={handleRepSelect}
-                  />
-                </div>
+                {/* Current set input */}
+                {!isCompleted && currentSetIndex < totalSets && (
+                  <>
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-secondary font-pixel text-xs">SET {currentSetIndex + 1}</span>
+                        
+                        {/* Weight Input */}
+                        <div className="flex items-center">
+                          <WeightControls
+                            value={weight}
+                            onChange={handleWeightChange}
+                            step={workout.weightIncrement || 5}
+                          />
+                          <span className="ml-2 text-xs text-gray-400">lbs</span>
+                        </div>
+                      </div>
+                      
+                      {/* Rep Counter */}
+                      <div className="mb-3">
+                        <p className="text-xs text-gray-400 mb-2">Reps completed:</p>
+                        <RepCounter 
+                          maxReps={20} 
+                          value={selectedReps} 
+                          onChange={handleRepSelect}
+                        />
+                      </div>
+                      
+                      {/* Complete Set Button */}
+                      <Button 
+                        onClick={(e) => { e.stopPropagation(); handleCompleteSet(); }}
+                        disabled={selectedReps === null}
+                        className="w-full py-2 rounded-md bg-secondary text-dark font-pixel text-sm hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-accent disabled:opacity-50"
+                      >
+                        LOG SET {currentSetIndex + 1}
+                      </Button>
+                    </div>
+                  </>
+                )}
                 
-                {/* Complete Set Button */}
-                <Button 
-                  onClick={handleCompleteSet}
-                  disabled={selectedReps === null}
-                  className="w-full py-2 rounded-md bg-secondary text-dark font-pixel text-sm hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-accent disabled:opacity-50"
-                >
-                  COMPLETE SET
-                </Button>
+                {/* Action Buttons */}
+                <div className="flex space-x-2 mt-4">
+                  {currentSetIndex < totalSets ? (
+                    <Button 
+                      onClick={(e) => { e.stopPropagation(); handleAddSet(); }}
+                      className="flex-1 py-2 rounded-md bg-accent text-white font-pixel text-xs hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-secondary"
+                    >
+                      <i className="ri-add-line mr-1"></i> ADD SET
+                    </Button>
+                  ) : null}
+                  
+                  {sets.length > 0 && (
+                    <Button 
+                      onClick={(e) => { e.stopPropagation(); handleCompleteExercise(); }}
+                      className="flex-1 py-2 rounded-md bg-primary text-white font-pixel text-xs hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-accent"
+                    >
+                      COMPLETE EXERCISE
+                    </Button>
+                  )}
+                </div>
               </div>
             ) : null}
           </div>

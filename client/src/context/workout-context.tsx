@@ -29,7 +29,10 @@ interface WorkoutContextProps {
   // Actions
   startWorkout: (workoutId: string) => void;
   completeWorkout: (workoutId: string) => void;
+  undoCompleteWorkout: (workoutId: string) => void;
   completeSet: (workoutId: string, set: Set) => void;
+  removeSet: (workoutId: string, setIndex: number) => void;
+  addSet: (workoutId: string) => void;
   setActiveSplit: (splitId: string) => void;
   createSplit: (split: Split) => void;
   updateSplit: (splitId: string, updatedSplit: Partial<Split>) => void;
@@ -39,6 +42,10 @@ interface WorkoutContextProps {
   addLiftToDay: (splitId: string, dayIndex: number, liftId: string, defaultSets?: number, defaultReps?: number) => void;
   removeLiftFromDay: (splitId: string, dayIndex: number, liftId: string) => void;
   updateLiftSettings: (liftId: string, settings: Partial<Lift>) => Lift;
+  completeCurrentDay: () => void;
+  undoCompleteCurrentDay: () => void;
+  advanceToNextDay: () => void;
+  moveToDay: (dayIndex: number) => void;
   
   // Getters
   getLastWeight: (liftId: string) => number;
@@ -47,6 +54,7 @@ interface WorkoutContextProps {
   getWorkoutDays: () => string[];
   getNextWorkoutDay: () => Day | null;
   getPreviousWorkoutDay: () => Day | null;
+  getDayStatus: (splitId: string, dayIndex: number) => 'pending' | 'active' | 'completed';
 }
 
 const WorkoutContext = createContext<WorkoutContextProps | undefined>(undefined);
@@ -399,6 +407,134 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     return currentSplit.days[prevDayIndex];
   };
   
+  // Undo a completed workout
+  const undoCompleteWorkout = (workoutId: string) => {
+    setUserData(prev => ({
+      ...prev,
+      workoutState: {
+        ...prev.workoutState,
+        completedWorkoutIds: prev.workoutState.completedWorkoutIds.filter(id => id !== workoutId)
+      }
+    }));
+  };
+  
+  // Remove a specific set from a workout
+  const removeSet = (workoutId: string, setIndex: number) => {
+    setUserData(prev => {
+      const existingSets = [...(prev.workoutState.workoutSets[workoutId] || [])];
+      if (setIndex >= 0 && setIndex < existingSets.length) {
+        existingSets.splice(setIndex, 1);
+      }
+      
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          workoutSets: {
+            ...prev.workoutState.workoutSets,
+            [workoutId]: existingSets
+          }
+        }
+      };
+    });
+  };
+  
+  // Add an additional set to a workout
+  const addSet = (workoutId: string) => {
+    // Just a placeholder - actual set will be added when completed
+    setUserData(prev => {
+      // No need to modify state here, just making the function available
+      return prev;
+    });
+  };
+  
+  // Complete the current day's workout
+  const completeCurrentDay = () => {
+    // First, save the current workout data to history
+    // This assumes all workouts for the day are completed
+    const today = new Date().toISOString().split('T')[0];
+    
+    setUserData(prev => {
+      // Add today to workout days if not already included
+      const updatedWorkoutDays = prev.workoutState.workoutDays.includes(today) 
+        ? [...prev.workoutState.workoutDays] 
+        : [...prev.workoutState.workoutDays, today];
+        
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          activeWorkoutId: null,
+          completedWorkoutIds: [],
+          workoutDays: updatedWorkoutDays
+        }
+      };
+    });
+    
+    // Then move to the next day
+    advanceToNextDay();
+  };
+  
+  // Undo the most recent completed day
+  const undoCompleteCurrentDay = () => {
+    // Just move back to the previous day
+    if (!currentSplit) return;
+    
+    const daysLength = currentSplit.days.length;
+    const prevDayIndex = (workoutState.currentDayIndex - 1 + daysLength) % daysLength;
+    
+    moveToDay(prevDayIndex);
+  };
+  
+  // Advance to the next day in the split
+  const advanceToNextDay = () => {
+    if (!currentSplit) return;
+    
+    const nextDayIndex = (workoutState.currentDayIndex + 1) % currentSplit.days.length;
+    
+    setUserData(prev => ({
+      ...prev,
+      workoutState: {
+        ...prev.workoutState,
+        currentDayIndex: nextDayIndex,
+        activeWorkoutId: null,
+        completedWorkoutIds: []
+      }
+    }));
+  };
+  
+  // Move to a specific day in the split
+  const moveToDay = (dayIndex: number) => {
+    if (!currentSplit || dayIndex < 0 || dayIndex >= currentSplit.days.length) return;
+    
+    setUserData(prev => ({
+      ...prev,
+      workoutState: {
+        ...prev.workoutState,
+        currentDayIndex: dayIndex,
+        activeWorkoutId: null,
+        completedWorkoutIds: []
+      }
+    }));
+  };
+  
+  // Get day status (pending, active, completed)
+  const getDayStatus = (splitId: string, dayIndex: number): 'pending' | 'active' | 'completed' => {
+    if (workoutState.currentSplitId !== splitId) return 'pending';
+    if (workoutState.currentDayIndex === dayIndex) return 'active';
+    
+    // Check if we have any history for this day
+    const split = splits.find(s => s.id === splitId);
+    if (!split || !split.days[dayIndex]) return 'pending';
+    
+    // Check if workouts for this day are in workout history
+    // This is a simplified check - a more robust implementation would track completed days
+    const today = new Date().toISOString().split('T')[0];
+    if (workoutState.workoutDays.includes(today)) return 'completed';
+    
+    return 'pending';
+  };
+  
   return (
     <WorkoutContext.Provider value={{
       // Data
@@ -413,7 +549,10 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
       // Actions
       startWorkout,
       completeWorkout,
+      undoCompleteWorkout,
       completeSet,
+      removeSet,
+      addSet,
       setActiveSplit,
       createSplit,
       updateSplit,
@@ -423,6 +562,10 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
       addLiftToDay,
       removeLiftFromDay,
       updateLiftSettings,
+      completeCurrentDay,
+      undoCompleteCurrentDay,
+      advanceToNextDay,
+      moveToDay,
       
       // Getters
       getLastWeight,
@@ -430,7 +573,8 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
       getLiftHistory,
       getWorkoutDays,
       getNextWorkoutDay,
-      getPreviousWorkoutDay
+      getPreviousWorkoutDay,
+      getDayStatus
     }}>
       {children}
     </WorkoutContext.Provider>
