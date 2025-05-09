@@ -116,10 +116,15 @@ html, body, #root {
   @apply h-full bg-secondary;
 }
 
-/* Navigation Active Style */
+/* Navigation Active Styles */
 .nav-active {
   @apply text-secondary scale-110;
   text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+}
+
+.nav-active-subtle {
+  @apply border-secondary;
+  box-shadow: inset 0 0 5px rgba(157, 0, 255, 0.3), 0 0 3px rgba(0, 255, 102, 0.3);
 }
 
 /* Workout Card */

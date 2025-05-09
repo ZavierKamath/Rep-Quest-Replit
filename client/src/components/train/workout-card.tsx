@@ -260,80 +260,81 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                 {/* Display completed sets */}
                 {sets.length > 0 && (
                   <div className="mb-3">
-                    <div className="flex justify-between text-xs text-gray-400 mb-2">
-                      <span>Set</span>
-                      <div className="flex items-center">
-                        <span className="mr-6">Weight × Reps</span>
-                        <span>Edit</span>
-                      </div>
+                    <div className="grid grid-cols-12 text-xs text-gray-400 mb-2 px-2">
+                      <span className="col-span-2">Set</span>
+                      <span className="col-span-5 text-center">Weight × Reps</span>
+                      <span className="col-span-5 text-right">Actions</span>
                     </div>
                     {sets.map((set, index) => (
                       <div 
                         key={index} 
-                        className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800 relative overflow-hidden group"
+                        className="grid grid-cols-12 items-center text-sm mb-1.5 py-1 border-b border-gray-800 relative overflow-hidden group"
                       >
                         <div className="absolute inset-0 bg-success opacity-5 pointer-events-none"></div>
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-success"></div>
-                        <span className="text-success font-pixel text-xs ml-2">SET {index + 1} ✓</span>
-                        <div className="flex items-center">
-                          <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
+                        
+                        {/* Set number - 2 columns */}
+                        <span className="text-success font-pixel text-xs ml-2 col-span-2">SET {index + 1} ✓</span>
+                        
+                        {/* Weight and reps - 5 columns */}
+                        <span className="font-body text-center col-span-5">{set.weight} lbs × {set.reps} reps</span>
+                        
+                        {/* Action buttons - 5 columns */}
+                        <div className="flex justify-end col-span-5">
+                          <Button 
+                            variant="outline"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              
+                              // Set edit mode
+                              setIsEditingMode(true);
+                              setEditingSetIndex(index);
+                              
+                              // Copy the set's info to the form for editing
+                              setWeight(set.weight);
+                              setSelectedReps(set.reps);
+                              
+                              // IMPORTANT - Make sure we're in the active workout state
+                              if (!isActive) {
+                                startWorkout(workout.id);
+                              }
+                              
+                              // Delete the set we're editing
+                              removeSet(workout.id, index);
+                            }}
+                            className="px-2 py-1 h-7 mr-1 text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-500 border border-amber-500/30 flex items-center"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                              <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
+                              <path d="m15 5 4 4"></path>
+                            </svg>
+                            Edit
+                          </Button>
                           
-                          <div className="flex ml-2">
-                            <Button 
-                              variant="outline"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                
-                                // Set edit mode
-                                setIsEditingMode(true);
-                                setEditingSetIndex(index);
-                                
-                                // Copy the set's info to the form for editing
-                                setWeight(set.weight);
-                                setSelectedReps(set.reps);
-                                
-                                // IMPORTANT - Make sure we're in the active workout state
-                                if (!isActive) {
-                                  startWorkout(workout.id);
-                                }
-                                
-                                // Delete the set we're editing
-                                removeSet(workout.id, index);
-                              }}
-                              className="px-2 py-1 h-7 mr-1 text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-500 border border-amber-500/30 flex items-center"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                                <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
-                                <path d="m15 5 4 4"></path>
-                              </svg>
-                              Edit
-                            </Button>
-                            
-                            <Button 
-                              variant="outline"
-                              size="sm"
-                              onClick={(e) => { 
-                                e.stopPropagation(); 
-                                
-                                // IMPORTANT - Make sure we're in the active workout state
-                                if (!isActive) {
-                                  startWorkout(workout.id);
-                                }
-                                
-                                // Use direct removeSet function with the specific index
-                                removeSet(workout.id, index); 
-                              }}
-                              className="px-2 py-1 h-7 text-xs bg-red-500/20 hover:bg-red-500/30 text-red-500 border border-red-500/30 flex items-center"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
-                                <path d="M3 6h18"></path>
-                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-                              </svg>
-                              Delete
-                            </Button>
-                          </div>
+                          <Button 
+                            variant="outline"
+                            size="sm"
+                            onClick={(e) => { 
+                              e.stopPropagation(); 
+                              
+                              // IMPORTANT - Make sure we're in the active workout state
+                              if (!isActive) {
+                                startWorkout(workout.id);
+                              }
+                              
+                              // Use direct removeSet function with the specific index
+                              removeSet(workout.id, index); 
+                            }}
+                            className="px-2 py-1 h-7 text-xs bg-red-500/20 hover:bg-red-500/30 text-red-500 border border-red-500/30 flex items-center"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                              <path d="M3 6h18"></path>
+                              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                            </svg>
+                            Delete
+                          </Button>
                         </div>
                       </div>
                     ))}
