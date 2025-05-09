@@ -147,11 +147,19 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
   
   return (
     <div 
-      className={`workout-card bg-[hsl(var(--card))] rounded-lg p-4 pixel-border ${
-        isActive ? "pixel-border-secondary active" : isCompleted ? "border-success" : "border-muted"
+      className={`workout-card rounded-lg p-4 pixel-border relative ${
+        isActive ? "bg-[hsl(var(--card))] pixel-border-secondary active" : 
+        isCompleted ? "bg-success/10 border-success/70" : 
+        "bg-[hsl(var(--card))] border-muted"
       } ${!isActive && !isCompleted ? "opacity-60" : ""}`}
       onClick={handleCardClick}
     >
+      {isCompleted && (
+        <div className="absolute -right-1 -top-1 w-8 h-8 bg-success rounded-full flex items-center justify-center pixel-border border-success shadow-lg">
+          <i className="ri-trophy-line text-black text-sm"></i>
+        </div>
+      )}
+    
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <div className={`w-10 h-10 mr-3 flex items-center justify-center bg-background rounded-md pixel-border ${
@@ -169,12 +177,16 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
         <div className="flex items-center">
           {isCompleted ? (
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               onClick={(e) => { e.stopPropagation(); handleUndoComplete(); }}
-              className="text-xs text-gray-400 hover:text-white"
+              className="text-xs text-white bg-slate-700 hover:bg-slate-600 border-slate-600 hover:border-slate-500 flex items-center transition-all duration-200 mr-2 px-3 py-1.5"
             >
-              <i className="ri-refresh-line mr-1"></i> Undo
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              Undo Complete
             </Button>
           ) : null}
           <div className={`h-6 w-6 ml-2 bg-background rounded-full flex items-center justify-center pixel-border ${
@@ -199,10 +211,23 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
               // Display completed sets
               <div>
                 <div className="mb-3">
-                  <div className="bg-success/10 p-3 rounded-lg border border-success/20 mb-2">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-success font-pixel text-sm">COMPLETED</span>
-                      <i className="ri-checkbox-circle-fill text-success text-lg"></i>
+                  <div className="bg-success/10 p-3 rounded-lg border border-success/30 mb-2 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-success/10 rounded-full -translate-x-12 -translate-y-12"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-success/10 rounded-full translate-x-8 translate-y-8"></div>
+                    
+                    <div className="flex items-center justify-between mb-3 relative">
+                      <div className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-success mr-2">
+                          <circle cx="12" cy="8" r="5"></circle>
+                          <path d="M20 21a8 8 0 0 0-16 0"></path>
+                          <path d="M17 19c-2.8-2.8-7.2-2.8-10 0"></path>
+                        </svg>
+                        <span className="text-success font-pixel text-sm">EXERCISE COMPLETED!</span>
+                      </div>
+                      <div className="flex">
+                        <i className="ri-medal-line text-success text-lg mr-1"></i>
+                        <i className="ri-checkbox-circle-fill text-success text-lg"></i>
+                      </div>
                     </div>
                     
                     <div className="flex justify-between text-xs text-gray-400 mb-2">
