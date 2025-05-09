@@ -8,89 +8,96 @@ interface ProgressChartProps {
 export default function ProgressChart({ liftHistory }: ProgressChartProps) {
   // Process data for the chart (last 6 entries)
   const processChartData = () => {
-    if (!liftHistory.length) {
-      // Generate placeholder data if no history
-      const placeholderData = [];
-      for (let i = 5; i >= 0; i--) {
-        placeholderData.push({
-          date: format(subDays(new Date(), i * 7), "M/d"),
-          weight: 0,
-          isPR: false
-        });
-      }
-      return placeholderData;
+    if (!liftHistory || liftHistory.length === 0) {
+      // Generate empty placeholder data if no history
+      return Array(6).fill({}).map((_, i) => ({
+        date: format(subDays(new Date(), i * 7), "M/d"),
+        weight: 0,
+        isPR: false
+      })).reverse();
     }
     
-    // Sort by date
-    const sortedHistory = [...liftHistory].sort((a, b) => 
-      new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+    // Sort history by date (oldest to newest)
+    const sortedHistory = [...liftHistory].sort((a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    });
     
-    // Get last 6 entries
-    const lastSixEntries = sortedHistory.slice(-6);
-    
-    console.log("Sorted history records:", sortedHistory);
-    console.log("Last six entries:", lastSixEntries);
-    
-    // Calculate max weight for each entry and determine if it's a PR
+    // Calculate PRs and create data points
     let currentPR = 0;
-    
-    // Scan records once to find the starting PR value (if there are earlier records)
-    const earlierEntries = sortedHistory.slice(0, -6);
-    if (earlierEntries.length > 0) {
-      earlierEntries.forEach(entry => {
-        if (entry.sets && entry.sets.length > 0) {
-          const entryMaxWeight = Math.max(...entry.sets.map(set => set.weight));
-          if (entryMaxWeight > currentPR) {
-            currentPR = entryMaxWeight;
-          }
-        }
-      });
-      console.log("Starting PR from earlier entries:", currentPR);
-    }
-    
-    const result = lastSixEntries.map(entry => {
-      // Make sure there are sets before trying to calculate max weight
+    const allDataPoints = sortedHistory.map(entry => {
+      // Skip entries with no sets
       if (!entry.sets || entry.sets.length === 0) {
-        return {
-          date: format(new Date(entry.date), "M/d"),
-          weight: 0,
-          isPR: false
-        };
+        return null;
       }
       
+      // Find max weight for this entry
       const maxWeight = Math.max(...entry.sets.map(set => set.weight));
-      const isPR = maxWeight > currentPR;
-      if (isPR) currentPR = maxWeight;
       
-      console.log(`Entry ${entry.date} - max weight: ${maxWeight}, isPR: ${isPR}`);
+      // Check if this is a PR
+      const isPR = maxWeight > currentPR;
+      if (isPR) {
+        currentPR = maxWeight;
+      }
       
       return {
         date: format(new Date(entry.date), "M/d"),
         weight: maxWeight,
         isPR
       };
-    });
+    }).filter(entry => entry !== null); // Remove null entries
     
-    console.log("Final chart data:", result);
-    return result;
+    // If no valid data points, return empty
+    if (allDataPoints.length === 0) {
+      return Array(6).fill({}).map((_, i) => ({
+        date: format(subDays(new Date(), i * 7), "M/d"),
+        weight: 0,
+        isPR: false
+      })).reverse();
+    }
+    
+    // Get last 6 entries (or all if less than 6)
+    const lastSixEntries = allDataPoints.length <= 6 
+      ? allDataPoints 
+      : allDataPoints.slice(-6);
+    
+    return lastSixEntries;
   };
   
   const chartData = processChartData();
   
   // Calculate max value for chart height normalization with a minimum of 10
   const maxValue = Math.max(10, ...chartData.map(d => d.weight));
+  const hasData = chartData.some(d => d.weight > 0);
   
   return (
     <>
       {/* Chart Container */}
-      <div className="h-48 flex items-end justify-between space-x-1 px-2">
+      <div className="h-48 flex items-end justify-between space-x-1 px-2 relative">
+        {/* No data message */}
+        {!hasData && (
+          <div className="absolute inset-0 flex items-center justify-center text-gray-400 text-sm">
+            No weight data yet
+          </div>
+        )}
+        
         {chartData.map((data, index) => (
-          <div key={index} className="flex flex-col items-center">
+          <div key={index} className="flex flex-col items-center relative z-10">
             <div 
-              className={`${data.isPR ? 'bg-secondary' : 'bg-primary'} w-6`}
-              style={{ height: `${(data.weight / maxValue) * 100}%` }}
+              className={`${data.isPR ? 'bg-secondary' : 'bg-primary'} w-8 rounded-t-sm ${data.weight > 0 ? 'pixel-border border-b-0' : ''}`}
+              style={{ 
+                height: `${data.weight > 0 ? Math.max(5, (data.weight / maxValue) * 100) : 0}%`,
+                opacity: data.weight > 0 ? 1 : 0
+              }}
             ></div>
+            
+            {/* Weight label on top of bar */}
+            {data.weight > 0 && (
+              <div className="absolute -top-6 text-xs font-pixel text-white">
+                {data.weight}
+              </div>
+            )}
+            
+            {/* Date label */}
             <span className="text-xs mt-1 text-gray-400">{data.date}</span>
           </div>
         ))}
