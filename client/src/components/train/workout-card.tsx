@@ -40,8 +40,11 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
   
   // Update current set index when sets change
   useEffect(() => {
-    setCurrentSetIndex(sets.length);
-  }, [sets.length]);
+    if (!isCompleted) {
+      // Only update the current set index if we're not in edit mode
+      setCurrentSetIndex(sets.length);
+    }
+  }, [sets.length, isCompleted]);
   
   // Handle weight change
   const handleWeightChange = (newWeight: number) => {
@@ -237,34 +240,48 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                         <div className="flex items-center">
                           <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
                           
-                          <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex ml-2">
                             <Button 
-                              variant="ghost"
+                              variant="outline"
                               size="sm"
                               onClick={(e) => {
                                 e.stopPropagation();
+                                
+                                // First, save the current index we're editing
+                                const editIndex = index;
                                 
                                 // Copy the set's info to the form for editing
                                 setWeight(set.weight);
                                 setSelectedReps(set.reps);
                                 
-                                // Delete the current set
-                                handleRemoveSet(index);
+                                // Delete this specific set - NOT based on current index
+                                removeSet(workout.id, editIndex);
                               }}
-                              className="px-2 py-1 h-6 text-xs text-amber-500 hover:text-amber-400 flex items-center"
-                              title="Edit set"
+                              className="px-2 py-1 h-7 mr-1 text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-500 border border-amber-500/30 flex items-center"
                             >
-                              <i className="ri-pencil-fill"></i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                                <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path>
+                                <path d="m15 5 4 4"></path>
+                              </svg>
+                              Edit
                             </Button>
                             
                             <Button 
-                              variant="ghost"
+                              variant="outline"
                               size="sm"
-                              onClick={(e) => { e.stopPropagation(); handleRemoveSet(index); }}
-                              className="px-2 py-1 h-6 text-xs text-red-500 hover:text-red-400 flex items-center"
-                              title="Delete set"
+                              onClick={(e) => { 
+                                e.stopPropagation(); 
+                                // Use direct removeSet function with the specific index
+                                removeSet(workout.id, index); 
+                              }}
+                              className="px-2 py-1 h-7 text-xs bg-red-500/20 hover:bg-red-500/30 text-red-500 border border-red-500/30 flex items-center"
                             >
-                              <i className="ri-delete-bin-fill"></i>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+                                <path d="M3 6h18"></path>
+                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                              </svg>
+                              Delete
                             </Button>
                           </div>
                         </div>
