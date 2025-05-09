@@ -185,19 +185,27 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
               // Display completed sets
               <div>
                 <div className="mb-3">
-                  <div className="flex justify-between text-xs text-gray-400 mb-2">
-                    <span>Set</span>
-                    <span>Weight × Reps</span>
-                  </div>
-                  {sets.map((set, index) => (
-                    <div key={index} className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="text-secondary font-pixel text-xs">SET {index + 1}</span>
-                      <div className="flex items-center">
-                        <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
-                        <i className="ri-checkbox-circle-line text-success"></i>
-                      </div>
+                  <div className="bg-success/10 p-3 rounded-lg border border-success/20 mb-2">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-success font-pixel text-sm">COMPLETED</span>
+                      <i className="ri-checkbox-circle-fill text-success text-lg"></i>
                     </div>
-                  ))}
+                    
+                    <div className="flex justify-between text-xs text-gray-400 mb-2">
+                      <span>Set</span>
+                      <span>Weight × Reps</span>
+                    </div>
+                    
+                    {sets.map((set, index) => (
+                      <div key={index} className="flex items-center justify-between text-sm mb-1.5 border-b border-success/10 pb-1">
+                        <span className="text-success font-pixel text-xs">SET {index + 1}</span>
+                        <div className="flex items-center">
+                          <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
+                          <i className="ri-checkbox-circle-line text-success"></i>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : isActive ? (
@@ -214,8 +222,13 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                       </div>
                     </div>
                     {sets.map((set, index) => (
-                      <div key={index} className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800">
-                        <span className="text-gray-300 font-pixel text-xs">SET {index + 1}</span>
+                      <div 
+                        key={index} 
+                        className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800 relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-success opacity-5 pointer-events-none"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-success"></div>
+                        <span className="text-success font-pixel text-xs ml-2">SET {index + 1} ✓</span>
                         <div className="flex items-center">
                           <span className="mr-6 font-body">{set.weight} lbs × {set.reps} reps</span>
                           <Button 
@@ -262,7 +275,21 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                       
                       {/* Complete Set Button */}
                       <Button 
-                        onClick={(e) => { e.stopPropagation(); handleCompleteSet(); }}
+                        onClick={(e) => { 
+                          e.stopPropagation(); 
+                          handleCompleteSet();
+                          
+                          // Show a temporary success message
+                          const button = e.currentTarget;
+                          const originalText = button.innerHTML;
+                          button.innerHTML = `<i class="ri-check-line mr-1"></i> SET ${currentSetIndex + 1} LOGGED!`;
+                          button.classList.add("bg-success", "border-success");
+                          
+                          setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove("bg-success", "border-success");
+                          }, 1000);
+                        }}
                         disabled={selectedReps === null}
                         className="w-full py-2 rounded-md bg-secondary text-dark font-pixel text-sm hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-accent disabled:opacity-50"
                       >

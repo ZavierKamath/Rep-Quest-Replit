@@ -205,7 +205,7 @@ export default function TrainPage() {
       
       {/* Submit Day Button */}
       {workouts.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-background border-t border-gray-800 p-4 flex justify-center">
+        <div className="fixed bottom-[60px] left-0 right-0 bg-background border-t border-gray-800 p-4 flex justify-center">
           <div className="container max-w-md">
             <div className="flex space-x-3">
               {completedCount > 0 && (
