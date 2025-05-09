@@ -155,8 +155,8 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
       onClick={handleCardClick}
     >
       {isCompleted && (
-        <div className="absolute -right-1 -top-1 w-8 h-8 bg-success rounded-full flex items-center justify-center pixel-border border-success shadow-lg">
-          <i className="ri-trophy-line text-black text-sm"></i>
+        <div className="absolute top-0 right-0 bg-success text-black py-1 px-3 rounded-bl-md font-pixel text-xs flex items-center justify-center shadow-md">
+          COMPLETED <i className="ri-check-line ml-1"></i>
         </div>
       )}
     
