@@ -188,16 +188,24 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
   
   // Set active split
   const setActiveSplit = (splitId: string) => {
-    setUserData(prev => ({
-      ...prev,
-      workoutState: {
-        ...prev.workoutState,
-        currentSplitId: splitId,
-        currentDayIndex: 0, // Reset to first day
-        activeWorkoutId: null,
-        completedWorkoutIds: []
-      }
-    }));
+    console.log(`Activating split with ID: ${splitId}`);
+    const splitToActivate = splits.find(s => s.id === splitId);
+    console.log("Split to activate:", splitToActivate);
+    
+    setUserData(prev => {
+      const newState = {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          currentSplitId: splitId,
+          currentDayIndex: 0, // Reset to first day
+          activeWorkoutId: null,
+          completedWorkoutIds: []
+        }
+      };
+      console.log("New state after activation:", newState);
+      return newState;
+    });
   };
   
   // Create a new split
