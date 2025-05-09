@@ -251,20 +251,20 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                                 // Delete the current set
                                 handleRemoveSet(index);
                               }}
-                              className="px-2 py-1 h-6 text-xs text-amber-500 hover:text-amber-400"
+                              className="px-2 py-1 h-6 text-xs text-amber-500 hover:text-amber-400 flex items-center"
                               title="Edit set"
                             >
-                              <i className="ri-edit-line"></i>
+                              <i className="ri-pencil-fill"></i>
                             </Button>
                             
                             <Button 
                               variant="ghost"
                               size="sm"
                               onClick={(e) => { e.stopPropagation(); handleRemoveSet(index); }}
-                              className="px-2 py-1 h-6 text-xs text-gray-400 hover:text-white"
+                              className="px-2 py-1 h-6 text-xs text-red-500 hover:text-red-400 flex items-center"
                               title="Delete set"
                             >
-                              <i className="ri-delete-bin-line"></i>
+                              <i className="ri-delete-bin-fill"></i>
                             </Button>
                           </div>
                         </div>
