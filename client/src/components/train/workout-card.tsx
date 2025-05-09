@@ -29,6 +29,8 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
   const [weight, setWeight] = useState(getLastWeight(workout.liftId) || workout.defaultWeight);
   const [selectedReps, setSelectedReps] = useState<number | null>(null);
   const [totalSets, setTotalSets] = useState(workout.defaultSets);
+  const [isEditingMode, setIsEditingMode] = useState(false);
+  const [editingSetIndex, setEditingSetIndex] = useState<number | null>(null);
   
   // Get exercise data
   const sets = getSetsForWorkout(workout.id);
@@ -40,11 +42,14 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
   
   // Update current set index when sets change
   useEffect(() => {
-    if (!isCompleted) {
+    if (!isCompleted && !isEditingMode) {
       // Only update the current set index if we're not in edit mode
       setCurrentSetIndex(sets.length);
+    } else if (isEditingMode && sets.length === currentSetIndex) {
+      // We're in edit mode and the set has been removed, ready for re-entry
+      // Keep the current index and don't update it
     }
-  }, [sets.length, isCompleted]);
+  }, [sets.length, isCompleted, isEditingMode, currentSetIndex]);
   
   // Handle weight change
   const handleWeightChange = (newWeight: number) => {
@@ -68,6 +73,12 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
     
     // Reset for next set
     setSelectedReps(null);
+    
+    // If we were in editing mode, exit it
+    if (isEditingMode) {
+      setIsEditingMode(false);
+      setEditingSetIndex(null);
+    }
     
     // If all sets completed, ask to finish exercise
     if (sets.length + 1 >= totalSets) {
@@ -247,15 +258,16 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                               onClick={(e) => {
                                 e.stopPropagation();
                                 
-                                // First, save the current index we're editing
-                                const editIndex = index;
+                                // Set edit mode
+                                setIsEditingMode(true);
+                                setEditingSetIndex(index);
                                 
                                 // Copy the set's info to the form for editing
                                 setWeight(set.weight);
                                 setSelectedReps(set.reps);
                                 
-                                // Delete this specific set - NOT based on current index
-                                removeSet(workout.id, editIndex);
+                                // Delete the set we're editing
+                                removeSet(workout.id, index);
                               }}
                               className="px-2 py-1 h-7 mr-1 text-xs bg-amber-500/20 hover:bg-amber-500/30 text-amber-500 border border-amber-500/30 flex items-center"
                             >
@@ -327,7 +339,13 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                           // Show a temporary success message
                           const button = e.currentTarget;
                           const originalText = button.innerHTML;
-                          button.innerHTML = `<i class="ri-check-line mr-1"></i> SET ${currentSetIndex + 1} LOGGED!`;
+                          
+                          if (isEditingMode) {
+                            button.innerHTML = `<i class="ri-check-line mr-1"></i> SET UPDATED!`;
+                          } else {
+                            button.innerHTML = `<i class="ri-check-line mr-1"></i> SET ${currentSetIndex + 1} LOGGED!`;
+                          }
+                          
                           button.classList.add("bg-success", "border-success");
                           
                           setTimeout(() => {
@@ -336,9 +354,13 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                           }, 1000);
                         }}
                         disabled={selectedReps === null}
-                        className="w-full py-2 rounded-md bg-secondary text-dark font-pixel text-sm hover:bg-opacity-90 transition-all duration-200 pixel-border pixel-border-accent disabled:opacity-50"
+                        className={`w-full py-2 rounded-md font-pixel text-sm hover:bg-opacity-90 transition-all duration-200 pixel-border ${
+                          isEditingMode 
+                            ? "bg-amber-500 text-black pixel-border-amber-700" 
+                            : "bg-secondary text-dark pixel-border-accent"
+                        } disabled:opacity-50`}
                       >
-                        LOG SET {currentSetIndex + 1}
+                        {isEditingMode ? `SAVE EDITED SET` : `LOG SET ${currentSetIndex + 1}`}
                       </Button>
                     </div>
                   </>
