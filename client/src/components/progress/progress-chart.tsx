@@ -29,12 +29,41 @@ export default function ProgressChart({ liftHistory }: ProgressChartProps) {
     // Get last 6 entries
     const lastSixEntries = sortedHistory.slice(-6);
     
+    console.log("Sorted history records:", sortedHistory);
+    console.log("Last six entries:", lastSixEntries);
+    
     // Calculate max weight for each entry and determine if it's a PR
     let currentPR = 0;
-    return lastSixEntries.map(entry => {
+    
+    // Scan records once to find the starting PR value (if there are earlier records)
+    const earlierEntries = sortedHistory.slice(0, -6);
+    if (earlierEntries.length > 0) {
+      earlierEntries.forEach(entry => {
+        if (entry.sets && entry.sets.length > 0) {
+          const entryMaxWeight = Math.max(...entry.sets.map(set => set.weight));
+          if (entryMaxWeight > currentPR) {
+            currentPR = entryMaxWeight;
+          }
+        }
+      });
+      console.log("Starting PR from earlier entries:", currentPR);
+    }
+    
+    const result = lastSixEntries.map(entry => {
+      // Make sure there are sets before trying to calculate max weight
+      if (!entry.sets || entry.sets.length === 0) {
+        return {
+          date: format(new Date(entry.date), "M/d"),
+          weight: 0,
+          isPR: false
+        };
+      }
+      
       const maxWeight = Math.max(...entry.sets.map(set => set.weight));
       const isPR = maxWeight > currentPR;
       if (isPR) currentPR = maxWeight;
+      
+      console.log(`Entry ${entry.date} - max weight: ${maxWeight}, isPR: ${isPR}`);
       
       return {
         date: format(new Date(entry.date), "M/d"),
@@ -42,12 +71,15 @@ export default function ProgressChart({ liftHistory }: ProgressChartProps) {
         isPR
       };
     });
+    
+    console.log("Final chart data:", result);
+    return result;
   };
   
   const chartData = processChartData();
   
-  // Calculate max value for chart height normalization
-  const maxValue = Math.max(...chartData.map(d => d.weight)) || 100;
+  // Calculate max value for chart height normalization with a minimum of 10
+  const maxValue = Math.max(10, ...chartData.map(d => d.weight));
   
   return (
     <>

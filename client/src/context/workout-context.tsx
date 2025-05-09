@@ -508,30 +508,67 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     
     const nextDayIndex = (workoutState.currentDayIndex + 1) % currentSplit.days.length;
     
-    setUserData(prev => ({
-      ...prev,
-      workoutState: {
-        ...prev.workoutState,
-        currentDayIndex: nextDayIndex,
-        activeWorkoutId: null,
-        completedWorkoutIds: []
-      }
-    }));
+    // Check if we're looping back to the beginning of the split
+    const isLoopingBack = nextDayIndex === 0;
+    
+    setUserData(prev => {
+      // Get the next day's workouts to reset their data
+      const nextDayWorkouts = isLoopingBack 
+        ? generateWorkoutsFromSplit(currentSplit, 0, lifts)
+        : generateWorkoutsFromSplit(currentSplit, nextDayIndex, lifts);
+      
+      // Create a new workoutSets object without the next day's workout data
+      const updatedWorkoutSets = { ...prev.workoutState.workoutSets };
+      
+      // Remove any existing sets for the workouts in the next day
+      nextDayWorkouts.forEach(workout => {
+        delete updatedWorkoutSets[workout.id];
+      });
+      
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          currentDayIndex: nextDayIndex,
+          activeWorkoutId: null,
+          completedWorkoutIds: [],
+          workoutSets: updatedWorkoutSets
+        }
+      };
+    });
+    
+    console.log(`Advanced to day ${nextDayIndex + 1} of split ${currentSplit.name}`);
   };
   
   // Move to a specific day in the split
   const moveToDay = (dayIndex: number) => {
     if (!currentSplit || dayIndex < 0 || dayIndex >= currentSplit.days.length) return;
     
-    setUserData(prev => ({
-      ...prev,
-      workoutState: {
-        ...prev.workoutState,
-        currentDayIndex: dayIndex,
-        activeWorkoutId: null,
-        completedWorkoutIds: []
-      }
-    }));
+    setUserData(prev => {
+      // Get the target day's workouts to reset their data
+      const targetDayWorkouts = generateWorkoutsFromSplit(currentSplit, dayIndex, lifts);
+      
+      // Create a new workoutSets object without the target day's workout data
+      const updatedWorkoutSets = { ...prev.workoutState.workoutSets };
+      
+      // Remove any existing sets for the workouts in the target day
+      targetDayWorkouts.forEach(workout => {
+        delete updatedWorkoutSets[workout.id];
+      });
+      
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          currentDayIndex: dayIndex,
+          activeWorkoutId: null,
+          completedWorkoutIds: [],
+          workoutSets: updatedWorkoutSets
+        }
+      };
+    });
+    
+    console.log(`Moved to day ${dayIndex + 1} of split ${currentSplit.name}`);
   };
   
   // Get day status (pending, active, completed)
