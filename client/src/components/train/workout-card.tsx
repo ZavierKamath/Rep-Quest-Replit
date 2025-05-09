@@ -266,6 +266,11 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                                 setWeight(set.weight);
                                 setSelectedReps(set.reps);
                                 
+                                // IMPORTANT - Make sure we're in the active workout state
+                                if (!isActive) {
+                                  startWorkout(workout.id);
+                                }
+                                
                                 // Delete the set we're editing
                                 removeSet(workout.id, index);
                               }}
@@ -283,6 +288,12 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                               size="sm"
                               onClick={(e) => { 
                                 e.stopPropagation(); 
+                                
+                                // IMPORTANT - Make sure we're in the active workout state
+                                if (!isActive) {
+                                  startWorkout(workout.id);
+                                }
+                                
                                 // Use direct removeSet function with the specific index
                                 removeSet(workout.id, index); 
                               }}
@@ -302,12 +313,16 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                   </div>
                 )}
                 
-                {/* Current set input */}
-                {!isCompleted && currentSetIndex < totalSets && (
+                {/* Current set input - show when adding a new set or in edit mode */}
+                {!isCompleted && (isEditingMode || currentSetIndex < totalSets) && (
                   <>
                     <div className="mb-3">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-secondary font-pixel text-xs">SET {currentSetIndex + 1}</span>
+                        <span className={`font-pixel text-xs ${isEditingMode ? "text-amber-500" : "text-secondary"}`}>
+                          {isEditingMode 
+                            ? `EDITING SET ${editingSetIndex !== null ? editingSetIndex + 1 : ""}` 
+                            : `SET ${currentSetIndex + 1}`}
+                        </span>
                         
                         {/* Weight Input */}
                         <div className="flex items-center">
