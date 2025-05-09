@@ -477,13 +477,29 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
   
   // Undo the most recent completed day
   const undoCompleteCurrentDay = () => {
-    // Just move back to the previous day
-    if (!currentSplit) return;
+    // Reset all workouts for the current day
+    if (!currentSplit || !currentDay) return;
     
-    const daysLength = currentSplit.days.length;
-    const prevDayIndex = (workoutState.currentDayIndex - 1 + daysLength) % daysLength;
-    
-    moveToDay(prevDayIndex);
+    setUserData(prev => {
+      // Get the workout IDs for the current day
+      const currentDayWorkouts = workouts.map(w => w.id);
+      
+      // Create a copy of the workout sets with the current day's sets removed
+      const updatedWorkoutSets = { ...prev.workoutState.workoutSets };
+      currentDayWorkouts.forEach(workoutId => {
+        delete updatedWorkoutSets[workoutId];
+      });
+      
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          activeWorkoutId: null,
+          completedWorkoutIds: [],
+          workoutSets: updatedWorkoutSets
+        }
+      };
+    });
   };
   
   // Advance to the next day in the split

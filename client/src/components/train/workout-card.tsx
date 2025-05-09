@@ -197,8 +197,13 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                     </div>
                     
                     {sets.map((set, index) => (
-                      <div key={index} className="flex items-center justify-between text-sm mb-1.5 border-b border-success/10 pb-1">
-                        <span className="text-success font-pixel text-xs">SET {index + 1}</span>
+                      <div 
+                        key={index} 
+                        className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-success/10 relative overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-success opacity-5 pointer-events-none"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-success"></div>
+                        <span className="text-success font-pixel text-xs ml-2">SET {index + 1}</span>
                         <div className="flex items-center">
                           <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
                           <i className="ri-checkbox-circle-line text-success"></i>
@@ -224,21 +229,44 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
                     {sets.map((set, index) => (
                       <div 
                         key={index} 
-                        className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800 relative overflow-hidden"
+                        className="flex items-center justify-between text-sm mb-1.5 py-1 border-b border-gray-800 relative overflow-hidden group"
                       >
                         <div className="absolute inset-0 bg-success opacity-5 pointer-events-none"></div>
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-success"></div>
                         <span className="text-success font-pixel text-xs ml-2">SET {index + 1} ✓</span>
                         <div className="flex items-center">
-                          <span className="mr-6 font-body">{set.weight} lbs × {set.reps} reps</span>
-                          <Button 
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => { e.stopPropagation(); handleRemoveSet(index); }}
-                            className="px-2 py-1 h-6 text-xs text-gray-400 hover:text-white"
-                          >
-                            <i className="ri-delete-bin-line"></i>
-                          </Button>
+                          <span className="mr-2 font-body">{set.weight} lbs × {set.reps} reps</span>
+                          
+                          <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
+                            <Button 
+                              variant="ghost"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                
+                                // Copy the set's info to the form for editing
+                                setWeight(set.weight);
+                                setSelectedReps(set.reps);
+                                
+                                // Delete the current set
+                                handleRemoveSet(index);
+                              }}
+                              className="px-2 py-1 h-6 text-xs text-amber-500 hover:text-amber-400"
+                              title="Edit set"
+                            >
+                              <i className="ri-edit-line"></i>
+                            </Button>
+                            
+                            <Button 
+                              variant="ghost"
+                              size="sm"
+                              onClick={(e) => { e.stopPropagation(); handleRemoveSet(index); }}
+                              className="px-2 py-1 h-6 text-xs text-gray-400 hover:text-white"
+                              title="Delete set"
+                            >
+                              <i className="ri-delete-bin-line"></i>
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     ))}
