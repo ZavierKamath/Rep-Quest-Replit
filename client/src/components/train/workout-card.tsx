@@ -155,8 +155,10 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
       onClick={handleCardClick}
     >
       {isCompleted && (
-        <div className="absolute top-0 right-0 bg-success text-black py-1 px-3 rounded-bl-md font-pixel text-xs flex items-center justify-center shadow-md">
-          COMPLETED <i className="ri-check-line ml-1"></i>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="bg-background/80 backdrop-blur-sm px-4 py-2 rounded-md font-pixel text-success text-base flex items-center justify-center shadow-md border border-success">
+            COMPLETED <i className="ri-checkbox-circle-fill ml-1.5"></i>
+          </div>
         </div>
       )}
     
