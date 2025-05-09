@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Lift, Day } from "@/types";
+import LiftSettings from "./lift-settings";
 
 interface DayEditorProps {
   splitId: string;
@@ -132,14 +133,17 @@ export default function DayEditor({ splitId, day, dayIndex, onSave, onCancel }: 
             {selectedLifts.map((liftId) => (
               <li key={liftId} className="flex justify-between items-center bg-background p-2 rounded">
                 <span className="text-sm">{getLiftName(liftId)}</span>
-                <Button
-                  onClick={() => handleRemoveLift(liftId)}
-                  variant="destructive"
-                  size="sm"
-                  className="h-6 text-xs"
-                >
-                  Remove
-                </Button>
+                <div className="flex space-x-2">
+                  <LiftSettings liftId={liftId} onSave={() => {}} />
+                  <Button
+                    onClick={() => handleRemoveLift(liftId)}
+                    variant="destructive"
+                    size="sm"
+                    className="h-6 text-xs"
+                  >
+                    Remove
+                  </Button>
+                </div>
               </li>
             ))}
           </ul>
