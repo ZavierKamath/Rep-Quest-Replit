@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 271 100% 50%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 140 100% 50%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 326 100% 50%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  --chart-1: 271 100% 50%;
+  --chart-2: 140 100% 50%;
+  --chart-3: 326 100% 50%;
+  --chart-4: 0 84.2% 60.2%;
+  --chart-5: 207 90% 54%;
+}
+
+.dark {
+  --background: 260 10% 12%;
+  --foreground: 0 0% 98%;
+  --muted: 260 8% 18%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 260 10% 10%;
+  --popover-foreground: 0 0% 98%;
+  --card: 260 10% 14%;
+  --card-foreground: 0 0% 98%;
+  --border: 260 8% 30%;
+  --input: 260 8% 20%;
+  --primary: 271 100% 50%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 140 100% 50%;
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 326 100% 50%;
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 271 100% 50%;
+  --radius: 0.5rem;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground font-body antialiased;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+/* Pixel Border Styling */
+.pixel-border {
+  @apply border-2 relative;
+  image-rendering: pixelated;
+}
+
+.pixel-border-primary {
+  @apply border-primary shadow-[0_0_5px_theme(colors.primary),0_0_10px_theme(colors.primary)];
+}
+
+.pixel-border-secondary {
+  @apply border-secondary shadow-[0_0_5px_theme(colors.secondary),0_0_10px_theme(colors.secondary)];
+}
+
+.pixel-border-accent {
+  @apply border-accent shadow-[0_0_5px_theme(colors.accent),0_0_10px_theme(colors.accent)];
+}
+
+.pixel-border-muted {
+  @apply border-muted;
+}
+
+/* Font Classes */
+.font-pixel {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Input Styles */
+.custom-number-input input::-webkit-inner-spin-button,
+.custom-number-input input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Progress Bar */
+.pixel-progress {
+  @apply h-5 relative bg-background border-2 border-primary shadow-[0_0_5px_rgba(157,0,255,0.5)];
+}
+
+.pixel-progress-bar {
+  @apply h-full bg-secondary;
+}
+
+/* Navigation Active Style */
+.nav-active {
+  @apply text-secondary scale-110;
+  text-shadow: 0 0 10px rgba(0, 255, 102, 0.8);
+}
+
+/* Workout Card */
+.workout-card {
+  @apply transition-all duration-300 relative;
+}
+
+.workout-card:before {
+  content: '';
+  @apply absolute inset-0 border-2 border-transparent pointer-events-none;
+}
+
+.workout-card.active:before {
+  @apply border-secondary shadow-[0_0_8px_rgba(0,255,102,0.6)];
+}
