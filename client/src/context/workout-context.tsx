@@ -32,6 +32,13 @@ interface WorkoutContextProps {
   completeSet: (workoutId: string, set: Set) => void;
   setActiveSplit: (splitId: string) => void;
   createSplit: (split: Split) => void;
+  updateSplit: (splitId: string, updatedSplit: Partial<Split>) => void;
+  addDayToSplit: (splitId: string, day: Day) => void;
+  updateDay: (splitId: string, dayIndex: number, updatedDay: Partial<Day>) => void;
+  deleteDay: (splitId: string, dayIndex: number) => void;
+  addLiftToDay: (splitId: string, dayIndex: number, liftId: string, defaultSets?: number, defaultReps?: number) => void;
+  removeLiftFromDay: (splitId: string, dayIndex: number, liftId: string) => void;
+  updateLiftSettings: (liftId: string, settings: Partial<Lift>) => Lift;
   
   // Getters
   getLastWeight: (liftId: string) => number;
@@ -201,6 +208,147 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }));
   };
   
+  // Update an existing split
+  const updateSplit = (splitId: string, updatedSplit: Partial<Split>) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId) {
+          return { ...split, ...updatedSplit };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Add a day to a split
+  const addDayToSplit = (splitId: string, day: Day) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId) {
+          return { 
+            ...split, 
+            days: [...split.days, day] 
+          };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Update a day in a split
+  const updateDay = (splitId: string, dayIndex: number, updatedDay: Partial<Day>) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId && dayIndex >= 0 && dayIndex < split.days.length) {
+          const updatedDays = [...split.days];
+          updatedDays[dayIndex] = { ...updatedDays[dayIndex], ...updatedDay };
+          return { ...split, days: updatedDays };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Delete a day from a split
+  const deleteDay = (splitId: string, dayIndex: number) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId && dayIndex >= 0 && dayIndex < split.days.length) {
+          const updatedDays = [...split.days];
+          updatedDays.splice(dayIndex, 1);
+          return { ...split, days: updatedDays };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Add a lift to a day
+  const addLiftToDay = (splitId: string, dayIndex: number, liftId: string, defaultSets = 3, defaultReps = 8) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId && dayIndex >= 0 && dayIndex < split.days.length) {
+          const updatedDays = [...split.days];
+          updatedDays[dayIndex] = { 
+            ...updatedDays[dayIndex], 
+            lifts: [...updatedDays[dayIndex].lifts, liftId] 
+          };
+          return { ...split, days: updatedDays };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Remove a lift from a day
+  const removeLiftFromDay = (splitId: string, dayIndex: number, liftId: string) => {
+    setUserData(prev => {
+      const updatedSplits = prev.splits.map(split => {
+        if (split.id === splitId && dayIndex >= 0 && dayIndex < split.days.length) {
+          const updatedDays = [...split.days];
+          updatedDays[dayIndex] = { 
+            ...updatedDays[dayIndex], 
+            lifts: updatedDays[dayIndex].lifts.filter(id => id !== liftId) 
+          };
+          return { ...split, days: updatedDays };
+        }
+        return split;
+      });
+      
+      return {
+        ...prev,
+        splits: updatedSplits
+      };
+    });
+  };
+  
+  // Update lift settings
+  const updateLiftSettings = (liftId: string, settings: Partial<Lift>) => {
+    let updatedLift: Lift = { id: '', name: '', defaultWeight: 0, weightIncrement: 0 };
+    
+    setUserData(prev => {
+      const updatedLifts = prev.lifts.map(lift => {
+        if (lift.id === liftId) {
+          updatedLift = { ...lift, ...settings };
+          return updatedLift;
+        }
+        return lift;
+      });
+      
+      return {
+        ...prev,
+        lifts: updatedLifts
+      };
+    });
+    
+    return updatedLift;
+  };
+  
   // Get last weight used for a lift
   const getLastWeight = (liftId: string): number => {
     const lastWeight = workoutState.lastWeights[liftId];
@@ -260,6 +408,13 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
       completeSet,
       setActiveSplit,
       createSplit,
+      updateSplit,
+      addDayToSplit,
+      updateDay,
+      deleteDay,
+      addLiftToDay,
+      removeLiftFromDay,
+      updateLiftSettings,
       
       // Getters
       getLastWeight,
