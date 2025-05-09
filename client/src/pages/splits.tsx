@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useWorkout } from "@/context/workout-context";
 import { Button } from "@/components/ui/button";
-import { Split } from "@/types";
+import { Split, Day } from "@/types";
 import SplitEditor from "@/components/splits/split-editor";
 
 export default function SplitsPage() {
   const { 
     splits, 
-    activeSplit, 
+    currentSplit, 
     setActiveSplit,
     updateSplit,
     deleteDay,
@@ -31,8 +31,8 @@ export default function SplitsPage() {
 
   // Handle editing active split
   const handleEditActiveSplit = () => {
-    if (activeSplit) {
-      setEditingSplitId(activeSplit.id);
+    if (currentSplit) {
+      setEditingSplitId(currentSplit.id);
       setIsCreatingNew(false);
     }
   };
@@ -59,7 +59,7 @@ export default function SplitsPage() {
   };
 
   // Filter other splits (non-active)
-  const otherSplits = splits.filter(split => split.id !== activeSplit?.id);
+  const otherSplits = splits.filter(split => split.id !== currentSplit?.id);
 
   return (
     <div className="py-4">
@@ -94,22 +94,22 @@ export default function SplitsPage() {
             <Button 
               onClick={handleEditActiveSplit}
               className="bg-secondary text-dark px-4 py-1 rounded text-xs font-pixel pixel-border pixel-border-accent"
-              disabled={!activeSplit}
+              disabled={!currentSplit}
             >
               EDIT
             </Button>
           </div>
           
-          {activeSplit ? (
+          {currentSplit ? (
             <div className="bg-[hsl(var(--card))] rounded-lg p-4 pixel-border pixel-border-secondary">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="font-body font-medium text-white">{activeSplit.name}</h3>
+                <h3 className="font-body font-medium text-white">{currentSplit.name}</h3>
                 <span className="bg-secondary text-dark px-2 py-1 rounded-full text-xs">Active</span>
               </div>
               
-              {activeSplit.days.length > 0 ? (
+              {currentSplit.days.length > 0 ? (
                 <div className="grid grid-cols-3 gap-2 mt-3">
-                  {activeSplit.days.map((day, index) => {
+                  {currentSplit.days.map((day: Day, index: number) => {
                     // Rotate between primary, accent, and secondary for styling
                     const borderClasses = [
                       "pixel-border-primary",

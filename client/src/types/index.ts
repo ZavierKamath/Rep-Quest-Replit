@@ -4,6 +4,7 @@ export interface Lift {
   name: string;
   defaultWeight: number;
   weightIncrement: number;
+  defaultReps?: number;
   icon?: string;
 }
 

@@ -10,12 +10,17 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose,
-  DialogFooter
+  DialogFooter,
+  DialogDescription
 } from "@/components/ui/dialog";
 
 interface LiftSettingsProps {
   liftId: string;
   onSave: () => void;
+}
+
+interface ExtendedLift extends Lift {
+  defaultReps?: number;
 }
 
 export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
@@ -24,6 +29,7 @@ export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
   
   const [defaultWeight, setDefaultWeight] = useState(lift?.defaultWeight || 0);
   const [weightIncrement, setWeightIncrement] = useState(lift?.weightIncrement || 0);
+  const [defaultReps, setDefaultReps] = useState((lift as ExtendedLift)?.defaultReps || 8);
   const [isOpen, setIsOpen] = useState(false);
   
   // Reset form when lift changes
@@ -31,6 +37,7 @@ export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
     if (lift) {
       setDefaultWeight(lift.defaultWeight);
       setWeightIncrement(lift.weightIncrement);
+      setDefaultReps((lift as ExtendedLift)?.defaultReps || 8);
     }
   }, [lift]);
   
@@ -48,12 +55,20 @@ export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
     }
   };
   
+  const handleRepsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value >= 0) {
+      setDefaultReps(value);
+    }
+  };
+  
   const handleSave = () => {
     if (lift) {
       updateLiftSettings(liftId, {
         defaultWeight,
-        weightIncrement
-      });
+        weightIncrement,
+        defaultReps
+      } as ExtendedLift);
       setIsOpen(false);
       onSave();
     }
@@ -75,6 +90,9 @@ export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
       <DialogContent className="bg-card border-primary">
         <DialogHeader>
           <DialogTitle className="font-pixel text-primary">{lift.name.toUpperCase()} SETTINGS</DialogTitle>
+          <DialogDescription className="text-muted-foreground text-sm">
+            Configure your exercise preferences
+          </DialogDescription>
         </DialogHeader>
         
         <div className="py-4 space-y-4">
@@ -102,6 +120,20 @@ export default function LiftSettings({ liftId, onSave }: LiftSettingsProps) {
               className="bg-background text-white"
             />
             <p className="text-gray-400 text-xs mt-1">How much to increase/decrease weight by default</p>
+          </div>
+          
+          <div>
+            <label className="block text-xs mb-2">Default Reps</label>
+            <Input
+              type="number"
+              value={defaultReps}
+              onChange={handleRepsChange}
+              min={1}
+              max={30}
+              step={1}
+              className="bg-background text-white"
+            />
+            <p className="text-gray-400 text-xs mt-1">Target reps for each set</p>
           </div>
         </div>
         
