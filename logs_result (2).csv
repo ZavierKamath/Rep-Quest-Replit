@@ -1,0 +1,271 @@
+"TimeUTC","timestampInMs","requestPath","requestMethod","requestQueryString","responseStatusCode","requestId","requestUserAgent","level","environment","branch","vercelCache","type","function","host","deploymentDomain","deploymentId","durationMs","region","maxMemoryUsed","memorySize","message","projectId","traceId","sessionId"
+"2025-05-12 07:17:46",1747034266226,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",-1,"xwrq5-1747034266029-e6ea60857be9","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:46",1747034266071,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",500,"xwrq5-1747034266029-e6ea60857be9","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",138,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:43",1747034263945,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",-1,"c64wx-1747034263749-b3a91d119f17","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:43",1747034263792,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",500,"c64wx-1747034263749-b3a91d119f17","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",137,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:42",1747034262613,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",-1,"54btk-1747034262410-27c5df99911c","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:42",1747034262452,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.png","GET","",500,"54btk-1747034262410-27c5df99911c","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",144,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:42",1747034262367,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"x4rzt-1747034262136-dfae89a9d1b6","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:42",1747034262180,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"x4rzt-1747034262136-dfae89a9d1b6","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",169,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:40",1747034260024,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"q9nd8-1747034259826-8ab4670eb7a1","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:39",1747034259871,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"q9nd8-1747034259826-8ab4670eb7a1","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",137,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:38",1747034258704,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"xctps-1747034258509-d766d31bbdfc","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:38",1747034258552,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"xctps-1747034258509-d766d31bbdfc","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",134,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:38",1747034258382,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"hx26v-1747034258180-8cc466638014","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:38",1747034258222,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"hx26v-1747034258180-8cc466638014","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",143,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:38",1747034258116,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"bkwz8-1747034257919-44d6c9822900","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257961,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"bkwz8-1747034257919-44d6c9822900","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",139,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257791,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"wgpwb-1747034257586-55cc61299f07","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257765,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"srdbr-1747034257559-727692784363","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257723,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"gb5pf-1747034257530-6f75e3cc3d5b","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257629,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"wgpwb-1747034257586-55cc61299f07","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",138,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257620,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"srdbr-1747034257559-727692784363","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",122,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257572,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"gb5pf-1747034257530-6f75e3cc3d5b","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",137,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257492,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"sg9vh-1747034257280-521a93624f40","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257434,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"rggzm-1747034257243-ed194af35719","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257324,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"sg9vh-1747034257280-521a93624f40","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",152,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257291,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"rggzm-1747034257243-ed194af35719","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",122,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257160,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"q5st6-1747034256712-4c770e9ba4a3","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257123,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"bq55f-1747034256293-6343a62c5b84","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:37",1747034257088,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"qdgjj-1747034256726-7b1f330e7d91","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256945,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"jtl6c-1747034256582-1601826d482d","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256878,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"qdgjj-1747034256726-7b1f330e7d91","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",134,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256860,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"q5st6-1747034256712-4c770e9ba4a3","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",124,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256796,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",-1,"zbrb4-1747034256388-e205341f0c0c","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/server/app' imported from /var/task/server/index.js
+    at finalizeResolution (node:internal/modules/esm/resolve:281:11)
+    at moduleResolve (node:internal/modules/esm/resolve:866:10)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///var/task/server/app'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256726,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"jtl6c-1747034256582-1601826d482d","Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",142,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256628,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"bq55f-1747034256293-6343a62c5b84","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",144,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 07:17:36",1747034256628,"rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app/","GET","",500,"zbrb4-1747034256388-e205341f0c0c","vercel-screenshot/1.0","error","production","master","MISS","lambda","/server/index.ts","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","rep-quest-tracker-7fby0imiw-zavier-kamaths-projects.vercel.app","dpl_EUans4atdkgkQeRkKRmx7JDiztWM",146,"iad1",77,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
