@@ -1,0 +1,91 @@
+"TimeUTC","timestampInMs","requestPath","requestMethod","requestQueryString","responseStatusCode","requestId","requestUserAgent","level","environment","branch","vercelCache","type","function","host","deploymentDomain","deploymentId","durationMs","region","maxMemoryUsed","memorySize","message","projectId","traceId","sessionId"
+"2025-05-12 06:41:13",1747032073566,"rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"gml69-1747032073279-0d028e9302ed","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 OPR/118.0.0.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:41:13",1747032073329,"rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"gml69-1747032073279-0d028e9302ed","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 OPR/118.0.0.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",214,"iad1",89,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:41:12",1747032072662,"rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app/","GET","",-1,"kqbqk-1747032072326-725c5d71e488","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 OPR/118.0.0.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:41:12",1747032072441,"rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app/","GET","",500,"kqbqk-1747032072326-725c5d71e488","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 OPR/118.0.0.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","rep-quest-tracker-zavierkamath-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",206,"iad1",90,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:41:02",1747032062221,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",-1,"rtrdv-1747032061947-2fa4e02c8dee","vercel-og/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:41:01",1747032061999,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",500,"rtrdv-1747032061947-2fa4e02c8dee","vercel-og/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",208,"iad1",90,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:36",1747032036723,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",-1,"wgpwb-1747032036465-b18701661ec1","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:36",1747032036507,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/favicon.ico","GET","",500,"wgpwb-1747032036465-b18701661ec1","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",201,"iad1",90,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:36",1747032036151,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",-1,"wd6gf-1747032035766-ecd820f90298","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:35",1747032035927,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",500,"wd6gf-1747032035766-ecd820f90298","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",204,"iad1",90,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:35",1747032035562,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",-1,"4rl2j-1747032035051-c7802a94b1e5","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",-1,"iad1",-1,-1,"Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@shared/schema.js' imported from /var/task/server/routes.js
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:268:9)
+    at packageResolve (node:internal/modules/esm/resolve:774:81)
+    at moduleResolve (node:internal/modules/esm/resolve:860:18)
+    at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14)
+    at defaultResolve (node:internal/modules/esm/resolve:1033:79)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:685:12)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:634:25)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:617:38)
+    at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:273:38)
+    at ModuleJob._link (node:internal/modules/esm/module_job:135:49) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Node.js process exited with exit status: 1. The logs above can help with debugging the issue.","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
+"2025-05-12 06:40:35",1747032035343,"rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app/","GET","",500,"4rl2j-1747032035051-c7802a94b1e5","vercel-screenshot/1.0","error","preview","","MISS","lambda","/server/index.ts","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","rep-quest-tracker-je1mg9yb2-zavier-kamaths-projects.vercel.app","dpl_Eadjue2FfGA6rurRbCQxuwBUqzaZ",203,"iad1",90,1024,"","prj_Vseshs3mdie1bT8Zllh9Txb4D8VW","",""
