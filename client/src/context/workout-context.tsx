@@ -3,7 +3,6 @@ import {
   UserData, 
   Split, 
   Workout, 
-  Set, 
   Lift, 
   Day,
   LiftHistoryRecord,
@@ -15,6 +14,14 @@ import {
   generateWorkoutsFromSplit,
   createEmptyLiftHistory
 } from "@/lib/workout-data";
+import { getLifts } from "@/lib/api";
+
+// Define Set type locally to avoid import issues
+interface Set {
+  weight: number;
+  reps: number;
+  completed: boolean;
+}
 
 interface WorkoutContextProps {
   // Data
@@ -96,6 +103,167 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
     liftHistory, 
     workoutState 
   } = userData;
+  
+  // Fetch lifts from API and update when component mounts
+  useEffect(() => {
+    const fetchLiftsFromAPI = async () => {
+      try {
+        console.log("client/src/context/workout-context.tsx: Fetching lifts from API");
+        const apiLifts = await getLifts();
+        
+        if (apiLifts && apiLifts.length > 0) {
+          console.log(`client/src/context/workout-context.tsx: Found ${apiLifts.length} lifts in API response`);
+          
+          // Convert API lifts to client lift format - IMPORTANT: Always use string IDs
+          const formattedApiLifts = apiLifts.map(apiLift => {
+            // Try to find a matching default lift ID for better consistency
+            const matchingDefaultLift = defaultLifts.find(
+              dl => dl.name.toLowerCase() === apiLift.name.toLowerCase()
+            );
+            
+            return {
+              // If we find a matching default lift, use its ID for consistency
+              id: matchingDefaultLift?.id || 
+                  // Otherwise transform numeric ID to string or generate new ID
+                  (typeof apiLift.id === 'number' ? `api_lift_${apiLift.id}` : 
+                  `api_lift_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`),
+              name: apiLift.name,
+              defaultWeight: apiLift.defaultWeight || 0,
+              weightIncrement: apiLift.weightIncrement || 5,
+              icon: matchingDefaultLift?.icon || getIconForLift(apiLift.name)
+            };
+          });
+          
+          // IMPORTANT: Always start with all default lifts to ensure they're available
+          const combinedLifts = [...defaultLifts];
+          
+          // Create a map of existing lift names for quick lookup
+          const existingLiftNames = new Map(combinedLifts.map(l => [l.name.toLowerCase(), l]));
+          
+          // Add API lifts that don't exist in defaults
+          formattedApiLifts.forEach(apiLift => {
+            if (!existingLiftNames.has(apiLift.name.toLowerCase())) {
+              combinedLifts.push(apiLift);
+              existingLiftNames.set(apiLift.name.toLowerCase(), apiLift);
+            }
+          });
+          
+          console.log(`client/src/context/workout-context.tsx: Using ${combinedLifts.length} total lifts`);
+          
+          // Update user data with all lifts
+          setUserData(prev => {
+            // Create lift history entries for any missing lifts
+            const updatedLiftHistory = { ...prev.liftHistory };
+            combinedLifts.forEach(lift => {
+              if (!updatedLiftHistory[lift.id]) {
+                updatedLiftHistory[lift.id] = [];
+              }
+            });
+            
+            return {
+              ...prev,
+              lifts: combinedLifts,
+              liftHistory: updatedLiftHistory
+            };
+          });
+        } else {
+          // If no API lifts found, ensure we at least have all default lifts
+          console.log(`client/src/context/workout-context.tsx: No API lifts found, using default lifts`);
+          
+          setUserData(prev => {
+            // Check if we already have all default lifts
+            const existingLiftIds = new Set(prev.lifts.map(l => l.id));
+            const missingDefaultLifts = defaultLifts.filter(dl => !existingLiftIds.has(dl.id));
+            
+            if (missingDefaultLifts.length === 0) {
+              console.log(`client/src/context/workout-context.tsx: All default lifts already present`);
+              return prev; // No change needed
+            }
+            
+            console.log(`client/src/context/workout-context.tsx: Adding ${missingDefaultLifts.length} missing default lifts`);
+            
+            // Update lift history for any new default lifts
+            const updatedLiftHistory = { ...prev.liftHistory };
+            missingDefaultLifts.forEach(lift => {
+              if (!updatedLiftHistory[lift.id]) {
+                updatedLiftHistory[lift.id] = [];
+              }
+            });
+            
+            return {
+              ...prev,
+              lifts: [...prev.lifts, ...missingDefaultLifts],
+              liftHistory: updatedLiftHistory
+            };
+          });
+        }
+      } catch (error) {
+        console.error("client/src/context/workout-context.tsx: Error fetching lifts:", error);
+        
+        // If API fetch fails, ensure we at least have default lifts available
+        setUserData(prev => {
+          const currentLiftIds = new Set(prev.lifts.map(lift => lift.id));
+          const missingDefaultLifts = defaultLifts.filter(lift => !currentLiftIds.has(lift.id));
+          
+          if (missingDefaultLifts.length === 0) {
+            return prev; // No change needed
+          }
+          
+          console.log(`client/src/context/workout-context.tsx: Adding ${missingDefaultLifts.length} missing default lifts after API error`);
+          
+          // Update lift history for any new default lifts
+          const updatedLiftHistory = { ...prev.liftHistory };
+          missingDefaultLifts.forEach(lift => {
+            if (!updatedLiftHistory[lift.id]) {
+              updatedLiftHistory[lift.id] = [];
+            }
+          });
+          
+          return {
+            ...prev,
+            lifts: [...prev.lifts, ...missingDefaultLifts],
+            liftHistory: updatedLiftHistory
+          };
+        });
+      }
+    };
+    
+    fetchLiftsFromAPI();
+  }, []);
+  
+  // Helper function to get an icon for a lift based on its name
+  const getIconForLift = (liftName: string): string => {
+    const liftNameLower = liftName.toLowerCase();
+    
+    if (liftNameLower.includes('bench') || liftNameLower.includes('chest') || liftNameLower.includes('push')) {
+      return 'ri-boxing-line';
+    } else if (liftNameLower.includes('shoulder') || liftNameLower.includes('press')) {
+      return 'ri-basketball-line';
+    } else if (liftNameLower.includes('tricep')) {
+      return 'ri-hand-coin-line';
+    } else if (liftNameLower.includes('lateral')) {
+      return 'ri-arrow-left-right-line';
+    } else if (liftNameLower.includes('delt') || liftNameLower.includes('rear')) {
+      return 'ri-refresh-line';
+    } else if (liftNameLower.includes('curl') || liftNameLower.includes('bicep')) {
+      return 'ri-contrast-2-line';
+    } else if (liftNameLower.includes('pull')) {
+      return 'ri-arrow-up-line';
+    } else if (liftNameLower.includes('row')) {
+      return 'ri-arrow-right-line';
+    } else if (liftNameLower.includes('down')) {
+      return 'ri-arrow-down-line';
+    } else if (liftNameLower.includes('leg') || liftNameLower.includes('squat') || liftNameLower.includes('deadlift')) {
+      return 'ri-walk-line';
+    } else if (liftNameLower.includes('calf')) {
+      return 'ri-footprint-line';
+    } else if (liftNameLower.includes('trap') || liftNameLower.includes('shrug')) {
+      return 'ri-arrow-up-line';
+    }
+    
+    // Default icon
+    return 'ri-dumbbell-line';
+  };
   
   // Calculate current split and day
   const currentSplit = splits.find(s => s.id === workoutState.currentSplitId) || null;

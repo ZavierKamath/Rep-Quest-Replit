@@ -2,7 +2,6 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertWorkoutDataSchema } from "@shared/schema";
-import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API Routes
@@ -60,12 +59,69 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get available lifts
   app.get("/api/lifts", async (req: Request, res: Response) => {
     try {
+      console.log("server/routes.ts: Handling GET /api/lifts request");
+      
       // Default to user ID 1 for demo
       const userId = 1;
       const lifts = await storage.getLifts(userId);
-      return res.json(lifts);
+      console.log(`server/routes.ts: Retrieved ${lifts.length} lifts from storage`);
+      
+      // Ensure our new lifts are available
+      // This is a temporary solution until we properly fix the storage implementation
+      const additionalLifts = [
+        { 
+          id: lifts.length + 1, 
+          name: "Push ups", 
+          defaultWeight: 0, 
+          weightIncrement: 0, 
+          userId: null 
+        },
+        { 
+          id: lifts.length + 2, 
+          name: "Pull ups", 
+          defaultWeight: 0, 
+          weightIncrement: 5, 
+          userId: null 
+        },
+        { 
+          id: lifts.length + 3, 
+          name: "Dumbbell Tricep Extension", 
+          defaultWeight: 25, 
+          weightIncrement: 5, 
+          userId: null 
+        },
+        { 
+          id: lifts.length + 4, 
+          name: "Rear Delt Rows on Bench", 
+          defaultWeight: 20, 
+          weightIncrement: 5, 
+          userId: null 
+        },
+        { 
+          id: lifts.length + 5, 
+          name: "Machine Preacher Curl", 
+          defaultWeight: 40, 
+          weightIncrement: 5, 
+          userId: null 
+        }
+      ];
+      console.log(`server/routes.ts: Prepared ${additionalLifts.length} additional lifts to add`);
+      
+      // Check if these lifts already exist by name
+      const allLifts = [...lifts];
+      let addedCount = 0;
+      for (const newLift of additionalLifts) {
+        if (!lifts.some(lift => lift.name === newLift.name)) {
+          allLifts.push(newLift);
+          addedCount++;
+        }
+      }
+      console.log(`server/routes.ts: Added ${addedCount} new lifts to the response`);
+      console.log(`server/routes.ts: Returning total of ${allLifts.length} lifts`);
+      
+      return res.json(allLifts);
     } catch (error) {
-      console.error("Error fetching lifts:", error);
+      console.error("server/routes.ts: Error fetching lifts:", error);
       return res.status(500).json({ error: "Failed to fetch lifts" });
     }
   });

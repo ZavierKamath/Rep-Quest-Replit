@@ -15,6 +15,11 @@ export const defaultLifts: Lift[] = [
   { id: "tricep_bar_pushdown", name: "Tricep bar pushdown", defaultWeight: 40, weightIncrement: 5, icon: "ri-arrow-down-line" },
   { id: "tricep_rope_pushdown", name: "Tricep rope pushdown", defaultWeight: 35, weightIncrement: 5, icon: "ri-arrow-down-line" },
   { id: "tricep_triangle_pushdown", name: "Tricep triangle pushdown", defaultWeight: 35, weightIncrement: 5, icon: "ri-arrow-down-line" },
+  { id: "push_ups", name: "Push ups", defaultWeight: 0, weightIncrement: 0, icon: "ri-boxing-line" },
+  { id: "pull_ups", name: "Pull ups", defaultWeight: 0, weightIncrement: 5, icon: "ri-arrow-up-line" },
+  { id: "db_tricep_extension", name: "Dumbbell Tricep Extension", defaultWeight: 25, weightIncrement: 5, icon: "ri-hand-coin-line" },
+  { id: "rear_delt_rows_bench", name: "Rear Delt Rows on Bench", defaultWeight: 20, weightIncrement: 5, icon: "ri-refresh-line" },
+  { id: "machine_preacher_curl", name: "Machine Preacher Curl", defaultWeight: 40, weightIncrement: 5, icon: "ri-contrast-2-line" },
   { id: "preacher_curl", name: "Preacher curl", defaultWeight: 45, weightIncrement: 5, icon: "ri-contrast-2-line" },
   { id: "standing_curl", name: "Standing curl", defaultWeight: 20, weightIncrement: 2.5, icon: "ri-contrast-2-line" },
   { id: "incline_bench_curl", name: "Incline bench curl", defaultWeight: 20, weightIncrement: 2.5, icon: "ri-contrast-2-line" },
@@ -44,11 +49,11 @@ export const defaultSplits: Split[] = [
     days: [
       {
         name: "Push",
-        lifts: ["bench_press", "shoulder_press", "tricep_pushdown"]
+        lifts: ["bench_press", "shoulder_press", "tricep_pushdown", "push_ups", "db_tricep_extension"]
       },
       {
         name: "Pull",
-        lifts: ["lat_pulldown", "cable_row", "bicep_curl"]
+        lifts: ["lat_pulldown", "cable_row", "bicep_curl", "pull_ups", "machine_preacher_curl"]
       },
       {
         name: "Legs",
@@ -62,7 +67,7 @@ export const defaultSplits: Split[] = [
     days: [
       {
         name: "Upper",
-        lifts: ["bench_press", "lat_pulldown", "shoulder_press", "cable_row", "tricep_pushdown", "bicep_curl"]
+        lifts: ["bench_press", "lat_pulldown", "shoulder_press", "cable_row", "tricep_pushdown", "bicep_curl", "push_ups", "pull_ups", "rear_delt_rows_bench"]
       },
       {
         name: "Lower",
@@ -76,7 +81,7 @@ export const defaultSplits: Split[] = [
     days: [
       {
         name: "Full Body",
-        lifts: ["bench_press", "squat", "lat_pulldown", "leg_press", "shoulder_press", "bicep_curl", "tricep_pushdown", "calf_raise_standing"]
+        lifts: ["bench_press", "squat", "lat_pulldown", "leg_press", "shoulder_press", "bicep_curl", "tricep_pushdown", "calf_raise_standing", "push_ups", "pull_ups", "db_tricep_extension", "machine_preacher_curl"]
       }
     ]
   }

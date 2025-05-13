@@ -98,6 +98,25 @@ export class MemStorage implements IStorage {
     this.currentWorkoutId = 1;
     this.currentSetId = 1;
     this.currentWorkoutDataId = 1;
+    
+    // Initialize with default lifts
+    const defaultLifts = [
+      { name: "Bench Press", defaultWeight: 135, weightIncrement: 5, userId: null },
+      { name: "Squat", defaultWeight: 135, weightIncrement: 10, userId: null },
+      { name: "Deadlift", defaultWeight: 185, weightIncrement: 10, userId: null },
+      { name: "Overhead Press", defaultWeight: 95, weightIncrement: 5, userId: null },
+      { name: "Pull-up", defaultWeight: 0, weightIncrement: 0, userId: null },
+      { name: "Push ups", defaultWeight: 0, weightIncrement: 0, userId: null },
+      { name: "Pull ups", defaultWeight: 0, weightIncrement: 5, userId: null },
+      { name: "Dumbbell Tricep Extension", defaultWeight: 25, weightIncrement: 5, userId: null },
+      { name: "Rear Delt Rows on Bench", defaultWeight: 20, weightIncrement: 5, userId: null },
+      { name: "Machine Preacher Curl", defaultWeight: 40, weightIncrement: 5, userId: null }
+    ];
+    
+    // Populate the lifts map
+    defaultLifts.forEach(lift => {
+      this.createLift(lift);
+    });
   }
   
   // User operations
