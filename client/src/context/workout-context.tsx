@@ -577,13 +577,21 @@ export const WorkoutProvider: React.FC<{ children: React.ReactNode }> = ({ child
   
   // Undo a completed workout
   const undoCompleteWorkout = (workoutId: string) => {
-    setUserData(prev => ({
-      ...prev,
-      workoutState: {
-        ...prev.workoutState,
-        completedWorkoutIds: prev.workoutState.completedWorkoutIds.filter(id => id !== workoutId)
-      }
-    }));
+    console.log(`Undoing completion for workout ID: ${workoutId}`);
+    console.log(`Current completed workouts: ${workoutState.completedWorkoutIds.join(', ')}`);
+    
+    setUserData(prev => {
+      const updatedCompletedIds = prev.workoutState.completedWorkoutIds.filter(id => id !== workoutId);
+      console.log(`Updated completed workouts: ${updatedCompletedIds.join(', ')}`);
+      
+      return {
+        ...prev,
+        workoutState: {
+          ...prev.workoutState,
+          completedWorkoutIds: updatedCompletedIds
+        }
+      };
+    });
   };
   
   // Remove a specific set from a workout

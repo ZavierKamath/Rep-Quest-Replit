@@ -105,8 +105,21 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
   
   // Handle undoing a completed exercise
   const handleUndoComplete = () => {
+    console.log("Undoing completion for workout:", workout.id);
+    
+    // Call the context function to undo completion
     undoCompleteWorkout(workout.id);
+    
+    // Update local state
     setExpanded(true);
+    
+    // Reset the current set index to the number of completed sets
+    setCurrentSetIndex(sets.length);
+    
+    // Visual feedback could be added here if desired
+    
+    // Make this workout active again
+    startWorkout(workout.id);
   };
   
   // Handle card click
@@ -116,6 +129,8 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
       e.target instanceof HTMLButtonElement || 
       e.target instanceof HTMLInputElement || 
       (e.target as HTMLElement).closest('button') ||
+      (e.target as HTMLElement).closest('svg') ||  // Ignore SVG icon clicks inside buttons
+      (e.target as HTMLElement).tagName.toLowerCase() === 'path' ||  // Ignore SVG path clicks inside buttons
       isActive
     ) {
       return;
@@ -181,8 +196,15 @@ export default function WorkoutCard({ workout, isActive, isCompleted }: WorkoutC
             <Button
               variant="outline"
               size="sm"
-              onClick={(e) => { e.stopPropagation(); handleUndoComplete(); }}
-              className="text-xs text-white bg-slate-700 hover:bg-slate-600 border-slate-600 hover:border-slate-500 flex items-center transition-all duration-200 mr-2 px-3 py-1.5"
+              onClick={(e) => {
+                // Stop propagation to prevent the card's click handler from interfering
+                e.stopPropagation();
+                // Call the undo function directly
+                handleUndoComplete();
+              }}
+              className="text-xs text-white bg-slate-800 hover:bg-slate-700 border-slate-600 hover:border-slate-500 flex items-center transition-all duration-200 mr-2 px-3 py-1.5 z-20 relative"
+              style={{ zIndex: 50 }} // Ensure the button is on top
+              aria-label="Undo Complete Exercise"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
                 <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
